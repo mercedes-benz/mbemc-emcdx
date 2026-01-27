@@ -1,0 +1,24 @@
+<Solution>
+  <Folder Name="/Samples/">
+    <Project Path="Samples/MBN50284/MBN50284.csproj" />
+  </Folder>
+  <Folder Name="/Solution Files/">
+    <File Path=".editorconfig" />
+    <File Path=".gitignore" />
+    <File Path="CodeMaid.config" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Build.targets" />
+    <File Path="get-package-licenses.bat" />
+    <File Path="get-package-licenses.sh" />
+    <File Path="global.json" />
+    <File Path="LICENSE" />
+    <File Path="LIESMICH.md" />
+    <File Path="PACKAGES.md" />
+    <File Path="README.md" />
+    <File Path="Tests.RunSettings" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/Mbemc.DataExchange.Tests.csproj" />
+  </Folder>
+  <Project Path="Mbemc.DataExchange/Mbemc.DataExchange.csproj" />
+</Solution>

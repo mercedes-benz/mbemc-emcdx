@@ -1,0 +1,80 @@
+{
+  "Type": "EMC Data Exchange Format",
+  "Version": "2.0",
+  "Description": "Bandbegrenztes Rauschen BLN(5MHz) nach MBN 50284:2022, ISO-Constant-Peak-Skalierung. <pk2rms(1ms)> = 10.05dB; <pk2av(1ms)> = 11.1dB",
+  "Data": {
+    "Name": "IQ",
+    "Description": "IQ data",
+    "Variables": [
+      {
+        "Name": "PK2RMS",
+        "Description": "Ratio of PK to RMS values of the IQ data.",
+        "Unit": "dB",
+        "Values": 12.56
+      },
+      {
+        "Name": "PK2AV",
+        "Description": "Ratio of PK to AV values of the IQ data.",
+        "Unit": "dB",
+        "Values": 13.609
+      },
+      {
+        "Name": "Clock",
+        "Description": "Clock or sampling rate of the IQ data.",
+        "Unit": "Hz",
+        "Values": 2.5E+7
+      },
+      {
+        "Name": "RMS_OFFS",
+        "Description": "For Rohde&Schwarz vector signal generators only! Recommended to be given in wv-file as 1st number in tag \"LEVEL_OFFS\".",
+        "Unit": "dB",
+        "Values": 12.633
+      },
+      {
+        "Name": "PK_OFFS",
+        "Description": "For Rohde&Schwarz vector signal generators only! Recommended to be given in wv-file as 2nd number in tag \"LEVEL_OFFS\".",
+        "Unit": "dB",
+        "Values": 0.073
+      },
+      {
+        "Name": "Real_Part",
+        "Description": "Real part of IQ data on a scale FS (full scale = +1.0). Note: PK(sqrt(I^2+Q^2)) may be <1.0, see PK_OFFS.",
+        "Unit": "FS",
+        "BinaryValues": {
+          "Dimensions": [
+            5.0E+7,
+            1
+          ],
+          "LoopOrder": "Colex",
+          "Scale": 1,
+          "Offset": 0,
+          "Format": "Float64",
+          "ByteOrder": "LittleEndian",
+          "SourceFormat": "binblock",
+          "Source": "../Binary/bln_05MHz_constPK_real_part.bin"
+        }
+      },
+      {
+        "Name": "Imag_Part",
+        "Description": "Imaginary part of IQ data on a scale FS (full scale = +1.0). Note: PK(sqrt(I^2+Q^2)) may be <1.0, see PK_OFFS.",
+        "Unit": "FS",
+        "BinaryValues": {
+          "Dimensions": [
+            5.0E+7,
+            1
+          ],
+          "LoopOrder": "Colex",
+          "Scale": 1,
+          "Offset": 0,
+          "Format": "Float64",
+          "ByteOrder": "LittleEndian",
+          "SourceFormat": "binblock",
+          "Source": "../Binary/bln_05MHz_constPK_imag_part.bin"
+        }
+      }
+    ],
+    "Mappings": []
+  },
+  "Copyright": "Mercedes-Benz AG, EMV",
+  "Date": "2023-04-26 19:17:03"
+}

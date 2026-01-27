@@ -1,4 +1,3 @@
-<!-- SPDX-License-Identifier: MIT -->
 # Contributing
 
 This document explains how to contribute to this project.
@@ -12,7 +11,7 @@ By contributing you will agree that your contribution will be put under the same
 
 ## CLA
 
-Before you can contribute, you will need to sign our cla [Contributor License Agreement](https://github.com/mercedes-benz/foss/blob/master/cla/CLA_Mercedes-Benz-Tech-Innovation.pdf) and send the signed CLA to <cla-mbti@mercedes-benz.com> 
+Before you can contribute, you will need to sign our cla [Contributor License Agreement](https://github.com/mercedes-benz/foss/blob/main/cla/2024-11-04_MB_FOSS_CLA_MBition.pdf) and send the signed CLA to <cla-mbti@mercedes-benz.com> 
 
 ## Communication
 
