@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net462;netstandard2.0;net8.0</TargetFrameworks>
+
+		<!--project-->
+		<Product>Mercedes-Benz EMV DataExchange Library</Product>
+		<PackageTags>EMC DataExchange, MBN50284</PackageTags>
+		<Description>Implementation of the Mercedes-Benz EMC data exchange format</Description>
+
+		<Copyright>(c) 2023-$([System.DateTime]::UtcNow.Year) Mercedes-Benz AG</Copyright>
+		<Company>Mercedes-Benz AG</Company>
+		<Authors>Andreas Rohleder</Authors>
+
+		<!-- Analyzers -->
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<AnalysisLevel>5</AnalysisLevel>
+		<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+		<!-- Build settings -->
+		<Deterministic>true</Deterministic>
+		<DeterministicSourcePaths>false</DeterministicSourcePaths>
+		<DelaySign>false</DelaySign>
+		<DebugType>portable</DebugType>
+		<CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+
+		<!-- Signature -->
+		<AssemblyOriginatorKeyFile>$(SolutionDir)Mbemc.DataExchange.snk</AssemblyOriginatorKeyFile>
+		<SignAssembly>True</SignAssembly>
+
+		<!-- Package settings -->
+		<PackageId>mbemc-emcdx</PackageId>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<NeutralLanguage />
+		<DebugSymbols>true</DebugSymbols>
+		<IncludeSymbols>true</IncludeSymbols>
+		<IncludeSymbolsInPackage>true</IncludeSymbolsInPackage>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<PackageProjectUrl>https://git.i.mercedes-benz.com/EMV/DataExchange</PackageProjectUrl>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+			<_Parameter1>Mbemc.DataExchange.Tests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100d18260b0ac9fd7969fc14f4d5ab84923bc8ebe2f63921eb7797787c1a667ba31e886772f743f5310b82586927c1e988f90e60777f27403d624d68ed7eed2b416403d3c63b390042278192acd450f5cf4b4730eadc09878f38a7d11fc8f00e9acfefb8b4f9aee749e6cfd64d1c53a052d3c25de8748ca2ea9ac94a22ee3e8dca3</_Parameter1>
+		</AssemblyAttribute>
+	</ItemGroup>
+
+	<!-- package references -->
+	<ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="9.0.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="$(SolutionDir)README.md" Pack="true" PackagePath="" />
+	</ItemGroup>
+</Project>

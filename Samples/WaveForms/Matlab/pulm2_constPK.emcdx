@@ -1,0 +1,80 @@
+{
+  "Type": "EMC Data Exchange Format",
+  "Version": "2.0",
+  "Description": "Pulsmodulation 2 (3us, 3333us) passend skaliert fuer BLNs nach MBN 50284:2022, ISO-Constant_Peak-Skalierung.",
+  "Data": {
+    "Name": "IQ",
+    "Description": "IQ data",
+    "Variables": [
+      {
+        "Name": "PK2RMS",
+        "Description": "Ratio of PK to RMS values of the IQ data.",
+        "Unit": "dB",
+        "Values": 30.268
+      },
+      {
+        "Name": "PK2AV",
+        "Description": "Ratio of PK to AV values of the IQ data.",
+        "Unit": "dB",
+        "Values": 60.463
+      },
+      {
+        "Name": "Clock",
+        "Description": "Clock or sampling rate of the IQ data.",
+        "Unit": "Hz",
+        "Values": 2.5E+7
+      },
+      {
+        "Name": "RMS_OFFS",
+        "Description": "For Rohde&Schwarz vector signal generators only! Recommended to be given in wv-file as 1st number in tag \"LEVEL_OFFS\".",
+        "Unit": "dB",
+        "Values": 32.85
+      },
+      {
+        "Name": "PK_OFFS",
+        "Description": "For Rohde&Schwarz vector signal generators only! Recommended to be given in wv-file as 2nd number in tag \"LEVEL_OFFS\".",
+        "Unit": "dB",
+        "Values": 2.582
+      },
+      {
+        "Name": "Real_Part",
+        "Description": "Real part of IQ data on a scale FS (full scale = +1.0). Note: PK(sqrt(I^2+Q^2)) may be <1.0, see PK_OFFS.",
+        "Unit": "FS",
+        "BinaryValues": {
+          "Dimensions": [
+            83325,
+            1
+          ],
+          "LoopOrder": "Colex",
+          "Scale": 1,
+          "Offset": 0,
+          "Format": "Float64",
+          "ByteOrder": "LittleEndian",
+          "SourceFormat": "binblock",
+          "Source": "../Binary/pulm2_constPK_real_part.bin"
+        }
+      },
+      {
+        "Name": "Imag_Part",
+        "Description": "Imaginary part of IQ data on a scale FS (full scale = +1.0). Note: PK(sqrt(I^2+Q^2)) may be <1.0, see PK_OFFS.",
+        "Unit": "FS",
+        "BinaryValues": {
+          "Dimensions": [
+            83325,
+            1
+          ],
+          "LoopOrder": "Colex",
+          "Scale": 1,
+          "Offset": 0,
+          "Format": "Float64",
+          "ByteOrder": "LittleEndian",
+          "SourceFormat": "binblock",
+          "Source": "../Binary/pulm2_constPK_imag_part.bin"
+        }
+      }
+    ],
+    "Mappings": []
+  },
+  "Copyright": "Mercedes-Benz AG, EMV",
+  "Date": "2023-04-26 19:17:20"
+}

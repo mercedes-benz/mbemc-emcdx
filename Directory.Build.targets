@@ -1,0 +1,13 @@
+<Project>
+	<PropertyGroup Condition="'$(OutputType)'=='Library'">
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+	</PropertyGroup>
+
+	<Target Name="RemoveDuplicateAnalyzers" BeforeTargets="CoreCompile">
+		<ItemGroup>
+			<FilteredAnalyzer Include="@(Analyzer->Distinct())" />
+			<Analyzer Remove="@(Analyzer)" />
+			<Analyzer Include="@(FilteredAnalyzer)" />
+		</ItemGroup>
+	</Target>
+</Project>
