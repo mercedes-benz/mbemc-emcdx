@@ -76,35 +76,45 @@ public record DxSettings
     /// <remarks>This allows to control the storage format of each value. This requires <see cref="Placement"/> to be set to <see cref="DxDataPlacement.BinaryFile"/>.</remarks>
     public DxValueFormat ValueFormat { get; set; } = DxValueFormat.Undefined;
 
+    /// <summary>
+    /// The maximum supported file size for .emcdx files.
+    /// </summary>
+    private long _maxEmcdxFileSize = 1L << 27;
+
     /// <summary>Gets or sets the maximum supported file size for .emcdx files.</summary>
     /// <remarks>Due to .NET restrictions the value cannot be set to a number greater than 2GB.</remarks>
     public long MaxEmcdxFileSize
     {
-        get;
+        get => _maxEmcdxFileSize;
         set
         {
             if (value is < 0 or > (1L << 31))
             {
                 throw new ArgumentOutOfRangeException($"{nameof(value)}", "Only values in [0..2GB] are supported.");
             }
-            field = value;
+            _maxEmcdxFileSize = value;
         }
-    } = 1L << 27;
+    }
+
+    /// <summary>
+    /// The maxium supported file size for .bin and .txt files
+    /// </summary>
+    private long _maxBinFileSize = 1L << 31;
 
     /// <summary>Gets or sets the maximum supported file size for .bin and .txt files.</summary>
     /// <remarks>Due to .NET restrictions the value cannot be set to a number greater than 2GB.</remarks>
     public long MaxBinFileSize
     {
-        get;
+        get => _maxBinFileSize;
         set
         {
             if (value is < 0 or > (1L << 31))
             {
                 throw new ArgumentOutOfRangeException($"{nameof(value)}", $"Only values in [0..2GB] are supported. Found {value}");
             }
-            field = value;
+            _maxBinFileSize = value;
         }
-    } = 1L << 31;
+    }
 
     /// <summary>Approximates the file size of the <paramref name="document"/> if it were to be serialized and throws an exception if it is larger than <see cref="MaxEmcdxFileSize"/></summary>
     /// <param name="document">The document to check</param>
