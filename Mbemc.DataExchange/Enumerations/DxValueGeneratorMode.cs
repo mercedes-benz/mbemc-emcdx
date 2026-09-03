@@ -11,5 +11,10 @@ public enum DxValueGeneratorMode
     Linear,
 
     /// <summary>Generator generates values with logarithmic distance.</summary>
-    Logarithmic
+    /// <remarks>Values grow exponentially using a logarithmic growth factor: value = start * e^(stepSize * step)</remarks>
+    Logarithmic,
+
+    /// <summary>Generator generates values with percent distance.</summary>
+    /// <remarks>Values grow by a fixed percentage per step: value = start * (1 + percent / 100)^step</remarks>
+    Percentual,
 }
