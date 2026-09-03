@@ -389,6 +389,9 @@ public class TestDxExtensions
 
     [Theory]
     [InlineData("#(10)1000000000", 1_000_000_000)]
+    [InlineData("#(00000000000000013)0000000000010", 10)]
+    [InlineData("#(               13)        00010", 10)]
+    [InlineData("#;00000000100", 100)]     // ; is 2 ascii values higher than 9 and thus basically 11.
     public void TestReadBinBlock(string header, int dataLength)
     {
         var dummyData = new string('A', dataLength);
@@ -408,6 +411,8 @@ public class TestDxExtensions
     [InlineData("#1", 1, typeof(InvalidOperationException))]
     [InlineData("#(10)", 10, typeof(InvalidOperationException))]
     [InlineData("#15", 4, typeof(InvalidOperationException))]
+    [InlineData("#3-12", 12, typeof(InvalidOperationException))]
+    [InlineData("#(999999999)999999999", 2, typeof(EndOfStreamException))]
     [InlineData("#(10)1000000001", 1_000_000_000, typeof(InvalidOperationException))]
     public void TestReadBinBlockShouldThrow(string header, int dataLength, Type expectedException)
     {
@@ -422,6 +427,8 @@ public class TestDxExtensions
     [InlineData(new byte[] { 1, 2, 3 }, 2.0, 10.0, new byte[] { 12, 14, 16 })]
     [InlineData(new byte[] { }, 2.0, 10.0, new byte[] { })]
     [InlineData(new byte[] { 1, 2, 3 }, 1.0, 0.0, new byte[] { 1, 2, 3 })]
+    [InlineData(new byte[] { 1, 2, 3 }, 2.0, 0.0, new byte[] { 2, 4, 6 })]
+    [InlineData(new byte[] { 1, 2, 3 }, 1.0, 2.0, new byte[] { 3, 4, 5 })]
     [InlineData(new byte[] { 1, 2, 3 }, 1.1, 1.1, new byte[] { (byte)((1 * 1.1) + 1.1), (byte)((2 * 1.1) + 1.1), (byte)((3 * 1.1) + 1.1) })]
     public void TestScaleByte(byte[] array, double scale, double offset, byte[] expectedResult)
     {
@@ -438,6 +445,8 @@ public class TestDxExtensions
     [InlineData(new double[] { 1.0, 2.0, 3.0 }, 2.0, 10.0, new double[] { 12.0, 14.0, 16.0 })]
     [InlineData(new double[] { }, 2.0, 10.0, new double[] { })]
     [InlineData(new double[] { 1, 2, 3 }, 1.0, 0.0, new double[] { 1, 2, 3 })]
+    [InlineData(new double[] { 1, 2, 3 }, 2.0, 0.0, new double[] { 2, 4, 6 })]
+    [InlineData(new double[] { 1, 2, 3 }, 1.0, 2.0, new double[] { 3, 4, 5 })]
     [InlineData(new double[] { 1, 2, 3 }, 1.1, 1.1, new double[] { ((1 * 1.1) + 1.1), ((2 * 1.1) + 1.1), ((3 * 1.1) + 1.1) })]
     [InlineData(new double[] { double.MinValue, double.MinValue, double.MinValue }, 12.34, -12.34, new double[] { double.NegativeInfinity, double.NegativeInfinity, double.NegativeInfinity })]
     [InlineData(new double[] { double.MaxValue, double.MaxValue, double.MaxValue }, 12.34, 12.34, new double[] { double.PositiveInfinity, double.PositiveInfinity, double.PositiveInfinity })]
@@ -451,6 +460,8 @@ public class TestDxExtensions
     [InlineData(new float[] { 1, 2, 3 }, 2.0, 10.0, new float[] { 12, 14, 16 })]
     [InlineData(new float[] { }, 2.0, 10.0, new float[] { })]
     [InlineData(new float[] { 1, 2, 3 }, 1.0, 0.0, new float[] { 1, 2, 3 })]
+    [InlineData(new float[] { 1, 2, 3 }, 2.0, 0.0, new float[] { 2, 4, 6 })]
+    [InlineData(new float[] { 1, 2, 3 }, 1.0, 2.0, new float[] { 3, 4, 5 })]
     [InlineData(new float[] { 1, 2, 3 }, 1.1, 1.1, new float[] { (float)((1 * 1.1) + 1.1), (float)((2 * 1.1) + 1.1), (float)((3 * 1.1) + 1.1) })]
     [InlineData(new float[] { float.MinValue, float.MinValue, float.MinValue }, 12.34, -12.34, new float[] { float.NegativeInfinity, float.NegativeInfinity, float.NegativeInfinity })]
     [InlineData(new float[] { float.MaxValue, float.MaxValue, float.MaxValue }, 12.34, 12.34, new float[] { float.PositiveInfinity, float.PositiveInfinity, float.PositiveInfinity })]
@@ -464,6 +475,8 @@ public class TestDxExtensions
     [InlineData(new int[] { 1, 2, 3 }, 2.0, 10.0, new int[] { 12, 14, 16 })]
     [InlineData(new int[] { }, 2.0, 10.0, new int[] { })]
     [InlineData(new int[] { 1, 2, 3 }, 1.0, 0.0, new int[] { 1, 2, 3 })]
+    [InlineData(new int[] { 1, 2, 3 }, 2.0, 0.0, new int[] { 2, 4, 6 })]
+    [InlineData(new int[] { 1, 2, 3 }, 1.0, 2.0, new int[] { 3, 4, 5 })]
     [InlineData(new int[] { 1, 2, 3 }, 1.1, 1.1, new int[] { (int)((1 * 1.1) + 1.1), (int)((2 * 1.1) + 1.1), (int)((3 * 1.1) + 1.1) })]
     public void TestScaleInt(int[] array, double scale, double offset, int[] expectedResult)
     {
@@ -480,6 +493,8 @@ public class TestDxExtensions
     [InlineData(new long[] { 1, 2, 3 }, 2.0, 10.0, new long[] { 12, 14, 16 })]
     [InlineData(new long[] { }, 2.0, 10.0, new long[] { })]
     [InlineData(new long[] { 1, 2, 3 }, 1.0, 0.0, new long[] { 1, 2, 3 })]
+    [InlineData(new long[] { 1, 2, 3 }, 2.0, 0.0, new long[] { 2, 4, 6 })]
+    [InlineData(new long[] { 1, 2, 3 }, 1.0, 2.0, new long[] { 3, 4, 5 })]
     [InlineData(new long[] { 1, 2, 3 }, 1.1, 1.1, new long[] { (long)((1 * 1.1) + 1.1), (long)((2 * 1.1) + 1.1), (long)((3 * 1.1) + 1.1) })]
     public void TestScaleLong(long[] array, double scale, double offset, long[] expectedResult)
     {
@@ -496,6 +511,8 @@ public class TestDxExtensions
     [InlineData(new sbyte[] { 1, 2, 3 }, 2.0, 10.0, new sbyte[] { 12, 14, 16 })]
     [InlineData(new sbyte[] { }, 2.0, 10.0, new sbyte[] { })]
     [InlineData(new sbyte[] { 1, 2, 3 }, 1.0, 0.0, new sbyte[] { 1, 2, 3 })]
+    [InlineData(new sbyte[] { 1, 2, 3 }, 2.0, 0.0, new sbyte[] { 2, 4, 6 })]
+    [InlineData(new sbyte[] { 1, 2, 3 }, 1.0, 2.0, new sbyte[] { 3, 4, 5 })]
     [InlineData(new sbyte[] { 1, 2, 3 }, 1.1, 1.1, new sbyte[] { (sbyte)((1 * 1.1) + 1.1), (sbyte)((2 * 1.1) + 1.1), (sbyte)((3 * 1.1) + 1.1) })]
     public void TestScaleSByte(sbyte[] array, double scale, double offset, sbyte[] expectedResult)
     {
@@ -512,6 +529,8 @@ public class TestDxExtensions
     [InlineData(new short[] { 1, 2, 3 }, 2.0, 10.0, new short[] { 12, 14, 16 })]
     [InlineData(new short[] { }, 2.0, 10.0, new short[] { })]
     [InlineData(new short[] { 1, 2, 3 }, 1.0, 0.0, new short[] { 1, 2, 3 })]
+    [InlineData(new short[] { 1, 2, 3 }, 2.0, 0.0, new short[] { 2, 4, 6 })]
+    [InlineData(new short[] { 1, 2, 3 }, 1.0, 2.0, new short[] { 3, 4, 5 })]
     [InlineData(new short[] { 1, 2, 3 }, 1.1, 1.1, new short[] { (short)((1 * 1.1) + 1.1), (short)((2 * 1.1) + 1.1), (short)((3 * 1.1) + 1.1) })]
     public void TestScaleShort(short[] array, double scale, double offset, short[] expectedResult)
     {
@@ -528,6 +547,8 @@ public class TestDxExtensions
     [InlineData(new uint[] { 1, 2, 3 }, 2.0, 10.0, new uint[] { 12, 14, 16 })]
     [InlineData(new uint[] { }, 2.0, 10.0, new uint[] { })]
     [InlineData(new uint[] { 1, 2, 3 }, 1.0, 0.0, new uint[] { 1, 2, 3 })]
+    [InlineData(new uint[] { 1, 2, 3 }, 2.0, 0.0, new uint[] { 2, 4, 6 })]
+    [InlineData(new uint[] { 1, 2, 3 }, 1.0, 2.0, new uint[] { 3, 4, 5 })]
     [InlineData(new uint[] { 1, 2, 3 }, 1.1, 1.1, new uint[] { (uint)((1 * 1.1) + 1.1), (uint)((2 * 1.1) + 1.1), (uint)((3 * 1.1) + 1.1) })]
     public void TestScaleUInt(uint[] array, double scale, double offset, uint[] expectedResult)
     {
@@ -544,6 +565,8 @@ public class TestDxExtensions
     [InlineData(new ulong[] { 1, 2, 3 }, 2.0, 10.0, new ulong[] { 12, 14, 16 })]
     [InlineData(new ulong[] { }, 2.0, 10.0, new ulong[] { })]
     [InlineData(new ulong[] { 1, 2, 3 }, 1.0, 0.0, new ulong[] { 1, 2, 3 })]
+    [InlineData(new ulong[] { 1, 2, 3 }, 2.0, 0.0, new ulong[] { 2, 4, 6 })]
+    [InlineData(new ulong[] { 1, 2, 3 }, 1.0, 2.0, new ulong[] { 3, 4, 5 })]
     [InlineData(new ulong[] { 1, 2, 3 }, 1.1, 1.1, new ulong[] { (ulong)((1 * 1.1) + 1.1), (ulong)((2 * 1.1) + 1.1), (ulong)((3 * 1.1) + 1.1) })]
     public void TestScaleULong(ulong[] array, double scale, double offset, ulong[] expectedResult)
     {
@@ -560,6 +583,8 @@ public class TestDxExtensions
     [InlineData(new ushort[] { 1, 2, 3 }, 2.0, 10.0, new ushort[] { 12, 14, 16 })]
     [InlineData(new ushort[] { }, 2.0, 10.0, new ushort[] { })]
     [InlineData(new ushort[] { 1, 2, 3 }, 1.0, 0.0, new ushort[] { 1, 2, 3 })]
+    [InlineData(new ushort[] { 1, 2, 3 }, 2.0, 0.0, new ushort[] { 2, 4, 6 })]
+    [InlineData(new ushort[] { 1, 2, 3 }, 1.0, 2.0, new ushort[] { 3, 4, 5 })]
     [InlineData(new ushort[] { 1, 2, 3 }, 1.1, 1.1, new ushort[] { (ushort)((1 * 1.1) + 1.1), (ushort)((2 * 1.1) + 1.1), (ushort)((3 * 1.1) + 1.1) })]
     public void TestScaleUShort(ushort[] array, double scale, double offset, ushort[] expectedResult)
     {

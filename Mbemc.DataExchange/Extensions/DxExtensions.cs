@@ -533,7 +533,7 @@ public static class DxExtensions
     /// <exception cref="OverflowException">Thrown if the result of the calculation exceeds the range of a byte</exception>
     public static void Scale(this byte[] array, double scale, double offset)
     {
-        if (scale != 1 && offset != 0)
+        if (scale != 1 || offset != 0)
         {
             for (var i = 0; i < array.LongLength; i++)
             {
@@ -549,7 +549,7 @@ public static class DxExtensions
     /// <exception cref="OverflowException">Thrown if the result of the calculation exceeds the range of a ushort</exception>
     public static void Scale(this ushort[] array, double scale, double offset)
     {
-        if (scale != 1 && offset != 0)
+        if (scale != 1 || offset != 0)
         {
             for (var i = 0; i < array.LongLength; i++)
             {
@@ -565,7 +565,7 @@ public static class DxExtensions
     /// <exception cref="OverflowException">Thrown if the result of the calculation exceeds the range of a uint</exception>
     public static void Scale(this uint[] array, double scale, double offset)
     {
-        if (scale != 1 && offset != 0)
+        if (scale != 1 || offset != 0)
         {
             for (var i = 0; i < array.LongLength; i++)
             {
@@ -581,7 +581,7 @@ public static class DxExtensions
     /// <exception cref="OverflowException">Thrown if the result of the calculation exceeds the range of a ulong</exception>
     public static void Scale(this ulong[] array, double scale, double offset)
     {
-        if (scale != 1 && offset != 0)
+        if (scale != 1 || offset != 0)
         {
             for (var i = 0; i < array.LongLength; i++)
             {
@@ -597,7 +597,7 @@ public static class DxExtensions
     /// <exception cref="OverflowException">Thrown if the result of the calculation exceeds the range of a sbyte</exception>
     public static void Scale(this sbyte[] array, double scale, double offset)
     {
-        if (scale != 1 && offset != 0)
+        if (scale != 1 || offset != 0)
         {
             for (var i = 0; i < array.LongLength; i++)
             {
@@ -613,7 +613,7 @@ public static class DxExtensions
     /// <exception cref="OverflowException">Thrown if the result of the calculation exceeds the range of a short</exception>
     public static void Scale(this short[] array, double scale, double offset)
     {
-        if (scale != 1 && offset != 0)
+        if (scale != 1 || offset != 0)
         {
             for (var i = 0; i < array.LongLength; i++)
             {
@@ -629,7 +629,7 @@ public static class DxExtensions
     /// <exception cref="OverflowException">Thrown if the result of the calculation exceeds the range of a int</exception>
     public static void Scale(this int[] array, double scale, double offset)
     {
-        if (scale != 1 && offset != 0)
+        if (scale != 1 || offset != 0)
         {
             for (var i = 0; i < array.LongLength; i++)
             {
@@ -645,7 +645,7 @@ public static class DxExtensions
     /// <exception cref="OverflowException">Thrown if the result of the calculation exceeds the range of a long</exception>
     public static void Scale(this long[] array, double scale, double offset)
     {
-        if (scale != 1 && offset != 0)
+        if (scale != 1 || offset != 0)
         {
             for (var i = 0; i < array.LongLength; i++)
             {
@@ -660,7 +660,7 @@ public static class DxExtensions
     /// <param name="offset">offset to add after scaling</param>
     public static void Scale(this double[] array, double scale, double offset)
     {
-        if (scale != 1 && offset != 0)
+        if (scale != 1 || offset != 0)
         {
             for (var i = 0; i < array.LongLength; i++)
             {
@@ -675,7 +675,7 @@ public static class DxExtensions
     /// <param name="offset">offset to add after scaling</param>
     public static void Scale(this float[] array, double scale, double offset)
     {
-        if (scale != 1 && offset != 0)
+        if (scale != 1 || offset != 0)
         {
             for (var i = 0; i < array.LongLength; i++)
             {
