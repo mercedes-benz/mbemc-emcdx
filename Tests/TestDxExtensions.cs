@@ -389,6 +389,9 @@ public class TestDxExtensions
 
     [Theory]
     [InlineData("#(10)1000000000", 1_000_000_000)]
+    [InlineData("#(00000000000000013)0000000000010", 10)]
+    [InlineData("#(               13)        00010", 10)]
+    [InlineData("#;00000000100", 100)]     // ; is 2 ascii values higher than 9 and thus basically 11.
     public void TestReadBinBlock(string header, int dataLength)
     {
         var dummyData = new string('A', dataLength);
@@ -408,6 +411,8 @@ public class TestDxExtensions
     [InlineData("#1", 1, typeof(InvalidOperationException))]
     [InlineData("#(10)", 10, typeof(InvalidOperationException))]
     [InlineData("#15", 4, typeof(InvalidOperationException))]
+    [InlineData("#3-12", 12, typeof(InvalidOperationException))]
+    [InlineData("#(999999999)999999999", 2, typeof(EndOfStreamException))]
     [InlineData("#(10)1000000001", 1_000_000_000, typeof(InvalidOperationException))]
     public void TestReadBinBlockShouldThrow(string header, int dataLength, Type expectedException)
     {
