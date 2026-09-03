@@ -496,6 +496,7 @@ public static class DxExtensions
         {
             numberOfLengthBytes = value - (byte)'0';
             if (numberOfLengthBytes < 0) throw new EndOfStreamException();
+            if (numberOfLengthBytes > 9) throw new InvalidDataException($"Invalid length byte \\x{value:X}!");
         }
 
         var dataLengthBytes = new byte[numberOfLengthBytes];
